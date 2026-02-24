@@ -14,9 +14,18 @@ font-family:'Orbitron',sans-serif;
 }
 
 body{
-background:#000;
 color:white;
 overflow-x:hidden;
+background:linear-gradient(-45deg,#000,#111,#000,#111);
+background-size:400% 400%;
+animation:gradientBG 15s ease infinite;
+}
+
+/* Animated background */
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
 }
 
 /* NAV */
@@ -27,9 +36,9 @@ padding:20px 40px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:linear-gradient(to right,#000,#111);
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(10px);
 z-index:1000;
-transition:0.4s;
 }
 
 .brand{
@@ -52,7 +61,7 @@ transition:0.3s;
 
 nav li:hover{
 opacity:1;
-text-shadow:0 0 15px white,0 0 25px white;
+text-shadow:0 0 20px white,0 0 35px white;
 }
 
 /* HERO */
@@ -83,7 +92,7 @@ transition:0.3s;
 }
 
 .title:hover{
-text-shadow:0 0 80px white,0 0 160px white,0 0 240px white;
+text-shadow:0 0 90px white,0 0 180px white,0 0 260px white;
 transform:scale(1.03);
 }
 
@@ -96,53 +105,55 @@ animation:fadeIn 2s forwards 1s;
 
 .download{
 margin-top:35px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:25px;
 opacity:0;
 animation:fadeIn 2s forwards 1.5s;
 }
 
-.download a{
-display:inline-block;
-padding:14px 35px;
+.download-btn{
+padding:14px 45px;
 background:white;
 color:black;
-border-radius:10px;
+border-radius:12px;
 text-decoration:none;
-font-weight:600;
+font-weight:700;
+letter-spacing:1px;
 transition:0.3s;
 }
 
-.download a:hover{
-transform:scale(1.05);
-box-shadow:0 0 25px white;
+.download-btn:hover{
+transform:scale(1.08);
+box-shadow:0 0 40px white;
 }
 
 .download img{
 width:450px;
-margin-top:25px;
 border-radius:15px;
-box-shadow:0 0 30px rgba(0,0,0,0.4);
+box-shadow:0 0 40px rgba(0,0,0,0.6);
 transition:0.4s;
 }
 
 .download img:hover{
-transform:scale(1.02);
-box-shadow:0 0 50px white;
+transform:scale(1.03);
+box-shadow:0 0 70px white;
 }
 
-/* SETTINGS BUTTON */
+/* SETTINGS */
 .settings-btn{
 position:fixed;
 left:20px;
 top:50%;
 transform:translateY(-50%);
-background:#222;
+background:#111;
 padding:15px;
 border-radius:12px;
 cursor:pointer;
 z-index:2000;
 }
 
-/* WINDOW */
 .window{
 position:fixed;
 top:150px;
@@ -191,14 +202,22 @@ right:20px;
 background:#111;
 padding:15px;
 border-radius:12px;
-z-index:2000;
 }
 
 .music-player input{
 width:150px;
 }
 
-/* ANIMATION */
+/* PARTICLES */
+canvas{
+position:fixed;
+top:0;
+left:0;
+pointer-events:none;
+z-index:-1;
+}
+
+/* FADE */
 @keyframes fadeIn{
 to{opacity:1;}
 }
@@ -206,6 +225,8 @@ to{opacity:1;}
 </head>
 
 <body>
+
+<canvas id="particles"></canvas>
 
 <nav>
 <div class="brand">JamalsArchive</div>
@@ -219,21 +240,16 @@ to{opacity:1;}
 </nav>
 
 <section class="hero">
-
 <div class="presents">JamalsArchive Presents</div>
 <h1 class="title">LETHAL APE</h1>
-
-<div class="rating">
-★★★★★ 4.8 – 200+ Reviews on Meta Quest
-</div>
+<div class="rating">★★★★★ 4.8 – 200+ Reviews on Meta Quest</div>
 
 <div class="download">
-<a href="https://www.meta.com/en-gb/experiences/lethal-ape/25282688598014625/?require_login=true" target="_blank">
+<a href="https://www.meta.com/en-gb/experiences/lethal-ape/25282688598014625/?require_login=true" target="_blank" class="download-btn">
 Download
 </a>
 <img src="lethalape.jpg">
 </div>
-
 </section>
 
 <div class="settings-btn" onclick="toggleWindow('settingsWindow')">⚙</div>
@@ -245,13 +261,11 @@ Display Properties
 </div>
 <div class="window-content">
 <p>Background Themes</p>
-
 <div class="color-option" style="background:#000" onclick="setTheme('#000','#111')"></div>
 <div class="color-option" style="background:#001f3f" onclick="setTheme('#001f3f','#002b5c')"></div>
 <div class="color-option" style="background:#300000" onclick="setTheme('#300000','#4d0000')"></div>
 <div class="color-option" style="background:#1b0033" onclick="setTheme('#1b0033','#330066')"></div>
 <div class="color-option" style="background:#002b00" onclick="setTheme('#002b00','#004d00')"></div>
-
 </div>
 </div>
 
@@ -301,7 +315,7 @@ Copyright
 </div>
 
 <div class="music-player">
-<audio id="bgMusic" loop>
+<audio id="bgMusic" loop autoplay muted>
 <source src="have to..mp3" type="audio/mpeg">
 </audio>
 <input type="range" min="0" max="1" step="0.01" value="0.5"
@@ -324,44 +338,63 @@ window.open("https://discord.gg/Dbac2yg7MQ","_blank");
 
 function setTheme(bg,navColor){
 document.body.style.background=bg;
-document.querySelector("nav").style.background=
-"linear-gradient(to right,"+bg+","+navColor+")";
 }
 
-document.addEventListener("click",function startMusic(){
-let music=document.getElementById("bgMusic");
+/* Autoplay Fix */
+window.addEventListener("load",function(){
+const music=document.getElementById("bgMusic");
 music.volume=0.5;
-music.play();
-document.removeEventListener("click",startMusic);
+music.muted=false;
+music.play().catch(()=>{
+document.addEventListener("click",()=>music.play(),{once:true});
+});
 });
 
-/* PERFECT DRAG */
+/* Drag Fix */
 document.querySelectorAll(".window").forEach(win=>{
 let header=win.querySelector(".window-header");
-
 header.onmousedown=function(e){
-e.preventDefault();
-
 let shiftX=e.clientX-win.getBoundingClientRect().left;
 let shiftY=e.clientY-win.getBoundingClientRect().top;
-
-function moveAt(pageX,pageY){
-win.style.left=pageX-shiftX+'px';
-win.style.top=pageY-shiftY+'px';
+function move(e){
+win.style.left=e.pageX-shiftX+'px';
+win.style.top=e.pageY-shiftY+'px';
 }
-
-function onMouseMove(e){
-moveAt(e.pageX,e.pageY);
-}
-
-document.addEventListener('mousemove',onMouseMove);
-
+document.addEventListener('mousemove',move);
 document.onmouseup=function(){
-document.removeEventListener('mousemove',onMouseMove);
+document.removeEventListener('mousemove',move);
 document.onmouseup=null;
 };
 };
 });
+
+/* PARTICLES */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<50;i++){
+particles.push({x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2+1,
+d:Math.random()*0.5});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+particles.forEach(p=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fill();
+p.y+=p.d;
+if(p.y>canvas.height)p.y=0;
+});
+requestAnimationFrame(draw);
+}
+draw();
 </script>
 
 </body>
