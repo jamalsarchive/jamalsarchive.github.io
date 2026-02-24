@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JamalsArchive</title>
 
-<!-- Futuristic Font -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -20,6 +19,7 @@ body{
     background:#000;
     color:white;
     overflow-x:hidden;
+    transition:0.3s;
 }
 
 /* NAVBAR */
@@ -30,8 +30,7 @@ nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    background:rgba(0,0,0,0.8);
-    backdrop-filter:blur(10px);
+    background:rgba(0,0,0,0.9);
     z-index:1000;
 }
 
@@ -57,7 +56,7 @@ nav ul li:hover{
     text-shadow:0 0 10px white;
 }
 
-/* HERO SECTION */
+/* HERO */
 .hero{
     height:100vh;
     display:flex;
@@ -65,6 +64,7 @@ nav ul li:hover{
     justify-content:center;
     align-items:center;
     text-align:center;
+    padding-top:80px;
 }
 
 .subtitle{
@@ -81,22 +81,43 @@ nav ul li:hover{
         0 0 20px white,
         0 0 40px white,
         0 0 80px white;
-    transition:0.3s;
-}
-
-.hero h1:hover{
-    text-shadow:
-        0 0 40px white,
-        0 0 80px white,
-        0 0 120px white;
 }
 
 .rating{
     margin-top:30px;
-    opacity:0.7;
+    opacity:0.8;
+    font-size:18px;
 }
 
-/* SETTINGS BUTTON (SIDE) */
+/* DOWNLOAD SECTION */
+.download{
+    margin-top:30px;
+    text-align:center;
+}
+
+.download img{
+    width:250px;
+    border-radius:15px;
+    margin-bottom:15px;
+    box-shadow:0 0 30px rgba(255,255,255,0.2);
+}
+
+.download a{
+    display:inline-block;
+    padding:12px 30px;
+    background:white;
+    color:black;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.download a:hover{
+    background:#ccc;
+}
+
+/* SETTINGS BUTTON */
 .settings-btn{
     position:fixed;
     left:15px;
@@ -107,29 +128,25 @@ nav ul li:hover{
     border-radius:12px;
     cursor:pointer;
     z-index:2000;
-    box-shadow:0 0 10px rgba(255,255,255,0.2);
 }
 
-/* WINDOW STYLE */
+/* WINDOW */
 .window{
     position:fixed;
-    top:120px;
-    left:50%;
-    transform:translateX(-50%);
+    top:150px;
+    left:150px;
     width:420px;
     background:#0a0a0a;
     border:1px solid #333;
     border-radius:12px;
     display:none;
     z-index:3000;
-    box-shadow:0 0 25px rgba(255,255,255,0.1);
 }
 
 .window-header{
     padding:12px;
     background:#111;
     cursor:move;
-    font-weight:600;
     border-bottom:1px solid #222;
 }
 
@@ -146,20 +163,6 @@ nav ul li:hover{
     border-radius:6px;
     border:1px solid #333;
 }
-
-/* MUSIC PLAYER */
-.music-player{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:#111;
-    padding:15px;
-    border-radius:12px;
-}
-
-.music-player input{
-    width:150px;
-}
 </style>
 </head>
 <body>
@@ -169,33 +172,47 @@ nav ul li:hover{
 <ul>
 <li>HOME</li>
 <li onclick="openAbout()">TEAM</li>
-<li>PRIVACY</li>
-<li onclick="scrollToDiscord()">DISCORD</li>
+<li onclick="openPrivacy()">PRIVACY</li>
+<li onclick="openDiscord()">DISCORD</li>
 </ul>
 </nav>
 
 <section class="hero">
 <div class="subtitle">JAMALSARCHIVE PRESENTS</div>
 <h1>LETHAL APE</h1>
-<div class="rating">★★★★★ 3.9 – 300+ Reviews on Meta Quest</div>
+<div class="rating">★★★★★ 4.8 – 200+ Reviews on Meta Quest</div>
+
+<div class="download">
+<!-- PUT YOUR IMAGE LINK BELOW -->
+<img src="PUT-IMAGE-LINK-HERE.jpg">
+<br>
+<a href="https://www.meta.com/en-gb/experiences/lethal-ape/25282688598014625/?require_login=true" target="_blank">
+Download on Meta Quest
+</a>
+</div>
 </section>
 
-<!-- SETTINGS SIDE BUTTON -->
 <div class="settings-btn" onclick="openSettings()">⚙</div>
 
-<!-- SETTINGS WINDOW -->
+<!-- SETTINGS -->
 <div class="window" id="settingsWindow">
 <div class="window-header" onmousedown="dragElement(this.parentElement)">Display Properties</div>
 <div class="window-content">
 <p>Desktop Color</p>
+
+<!-- MORE COLORS ADDED -->
 <div class="color-option" style="background:#000" onclick="changeColor('#000')"></div>
 <div class="color-option" style="background:#0d1117" onclick="changeColor('#0d1117')"></div>
 <div class="color-option" style="background:#111111" onclick="changeColor('#111111')"></div>
 <div class="color-option" style="background:#001f3f" onclick="changeColor('#001f3f')"></div>
+<div class="color-option" style="background:#300000" onclick="changeColor('#300000')"></div>
+<div class="color-option" style="background:#1b0033" onclick="changeColor('#1b0033')"></div>
+<div class="color-option" style="background:#002b36" onclick="changeColor('#002b36')"></div>
+
 </div>
 </div>
 
-<!-- ABOUT OWNER WINDOW -->
+<!-- ABOUT -->
 <div class="window" id="aboutWindow">
 <div class="window-header" onmousedown="dragElement(this.parentElement)">About The Owner</div>
 <div class="window-content">
@@ -208,13 +225,12 @@ Website Design
 </div>
 </div>
 
-<!-- MUSIC -->
-<div class="music-player">
-<audio id="bgMusic" loop autoplay>
-<source src="YOUR-MUSIC.mp3" type="audio/mpeg">
-</audio>
-<input type="range" min="0" max="1" step="0.01" value="0.5"
-oninput="document.getElementById('bgMusic').volume=this.value">
+<!-- PRIVACY -->
+<div class="window" id="privacyWindow">
+<div class="window-header" onmousedown="dragElement(this.parentElement)">Privacy Policy</div>
+<div class="window-content">
+This website does not collect personal data.
+</div>
 </div>
 
 <script>
@@ -226,33 +242,45 @@ function openAbout(){
 document.getElementById("aboutWindow").style.display="block";
 }
 
+function openPrivacy(){
+document.getElementById("privacyWindow").style.display="block";
+}
+
+function openDiscord(){
+window.open("https://discord.gg/Dbac2yg7MQ", "_blank");
+}
+
 function changeColor(color){
 document.body.style.background=color;
 }
 
-function scrollToDiscord(){
-window.scrollTo({top:window.innerHeight,behavior:'smooth'});
-}
-
-/* DRAG SYSTEM */
+/* FIXED DRAG SYSTEM */
 function dragElement(elmnt){
-var pos1=0,pos2=0,pos3=0,pos4=0;
-document.onmouseup=closeDrag;
-document.onmousemove=drag;
+let pos1=0,pos2=0,pos3=0,pos4=0;
 
-function drag(e){
-e=e||window.event;
-pos1=pos3-e.clientX;
-pos2=pos4-e.clientY;
-pos3=e.clientX;
-pos4=e.clientY;
-elmnt.style.top=(elmnt.offsetTop-pos2)+"px";
-elmnt.style.left=(elmnt.offsetLeft-pos1)+"px";
+elmnt.onmousedown = dragMouseDown;
+
+function dragMouseDown(e){
+e.preventDefault();
+pos3 = e.clientX;
+pos4 = e.clientY;
+document.onmouseup = closeDragElement;
+document.onmousemove = elementDrag;
 }
 
-function closeDrag(){
-document.onmouseup=null;
-document.onmousemove=null;
+function elementDrag(e){
+e.preventDefault();
+pos1 = pos3 - e.clientX;
+pos2 = pos4 - e.clientY;
+pos3 = e.clientX;
+pos4 = e.clientY;
+elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+}
+
+function closeDragElement(){
+document.onmouseup = null;
+document.onmousemove = null;
 }
 }
 </script>
