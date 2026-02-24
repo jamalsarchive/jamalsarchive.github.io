@@ -1,223 +1,245 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JamalsArchive</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Orbitron', sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Orbitron',sans-serif;
+transition:0.3s;
 }
 
 body{
-    background:#000;
-    color:white;
-    overflow-x:hidden;
-    transition:0.3s;
+background:#000;
+color:white;
+overflow-x:hidden;
 }
 
-/* NAVBAR */
+/* NAV */
 nav{
-    position:fixed;
-    width:100%;
-    padding:20px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(0,0,0,0.9);
-    z-index:1000;
-}
-
-.logo{
-    font-weight:800;
-    font-size:20px;
+position:fixed;
+width:100%;
+padding:20px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:linear-gradient(to right,#000,#111);
+z-index:1000;
 }
 
 nav ul{
-    list-style:none;
-    display:flex;
-    gap:40px;
+list-style:none;
+display:flex;
+gap:40px;
 }
 
-nav ul li{
-    cursor:pointer;
-    opacity:0.7;
-    transition:0.3s;
+nav li{
+cursor:pointer;
+opacity:0.7;
 }
 
-nav ul li:hover{
-    opacity:1;
-    text-shadow:0 0 10px white;
+nav li:hover{
+opacity:1;
+text-shadow:
+0 0 10px white,
+0 0 20px white,
+0 0 40px white;
 }
 
 /* HERO */
 .hero{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding-top:80px;
-}
-
-.subtitle{
-    letter-spacing:4px;
-    font-size:14px;
-    opacity:0.6;
-    margin-bottom:20px;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding-top:80px;
 }
 
 .hero h1{
-    font-size:110px;
-    font-weight:800;
-    text-shadow:
-        0 0 20px white,
-        0 0 40px white,
-        0 0 80px white;
+font-size:110px;
+text-shadow:
+0 0 30px white,
+0 0 60px white,
+0 0 100px white;
+}
+
+.hero h1:hover{
+text-shadow:
+0 0 60px white,
+0 0 120px white,
+0 0 200px white;
 }
 
 .rating{
-    margin-top:30px;
-    opacity:0.8;
-    font-size:18px;
+margin-top:30px;
+font-size:18px;
 }
 
-/* DOWNLOAD SECTION */
+/* DOWNLOAD */
 .download{
-    margin-top:30px;
-    text-align:center;
+margin-top:30px;
+text-align:center;
 }
 
 .download img{
-    width:250px;
-    border-radius:15px;
-    margin-bottom:15px;
-    box-shadow:0 0 30px rgba(255,255,255,0.2);
+width:500px;
+border-radius:15px;
+box-shadow:0 0 40px rgba(255,255,255,0.2);
+margin-top:20px;
 }
 
 .download a{
-    display:inline-block;
-    padding:12px 30px;
-    background:white;
-    color:black;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:600;
-    transition:0.3s;
+display:inline-block;
+padding:14px 35px;
+background:white;
+color:black;
+border-radius:10px;
+font-weight:600;
+text-decoration:none;
 }
 
 .download a:hover{
-    background:#ccc;
+background:#ccc;
 }
 
 /* SETTINGS BUTTON */
 .settings-btn{
-    position:fixed;
-    left:15px;
-    top:50%;
-    transform:translateY(-50%);
-    background:#111;
-    padding:15px;
-    border-radius:12px;
-    cursor:pointer;
-    z-index:2000;
+position:fixed;
+left:15px;
+top:50%;
+transform:translateY(-50%);
+background:#111;
+padding:15px;
+border-radius:12px;
+cursor:pointer;
+z-index:2000;
 }
 
 /* WINDOW */
 .window{
-    position:fixed;
-    top:150px;
-    left:150px;
-    width:420px;
-    background:#0a0a0a;
-    border:1px solid #333;
-    border-radius:12px;
-    display:none;
-    z-index:3000;
+position:fixed;
+top:150px;
+left:200px;
+width:450px;
+background:#111;
+border:1px solid #333;
+border-radius:12px;
+display:none;
+z-index:3000;
 }
 
 .window-header{
-    padding:12px;
-    background:#111;
-    cursor:move;
-    border-bottom:1px solid #222;
+padding:12px;
+background:#1a1a1a;
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:move;
+}
+
+.close-btn{
+cursor:pointer;
+color:red;
+font-weight:bold;
 }
 
 .window-content{
-    padding:20px;
+padding:20px;
 }
 
 .color-option{
-    width:30px;
-    height:30px;
-    display:inline-block;
-    margin:8px;
-    cursor:pointer;
-    border-radius:6px;
-    border:1px solid #333;
+width:30px;
+height:30px;
+display:inline-block;
+margin:8px;
+cursor:pointer;
+border-radius:6px;
+border:1px solid #333;
+}
+
+/* MUSIC */
+.music-player{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#111;
+padding:15px;
+border-radius:12px;
+z-index:2000;
+}
+.music-player input{
+width:150px;
 }
 </style>
 </head>
 <body>
 
 <nav>
-<div class="logo">JamalsArchive</div>
+<div>JamalsArchive</div>
 <ul>
-<li>HOME</li>
-<li onclick="openAbout()">TEAM</li>
-<li onclick="openPrivacy()">PRIVACY</li>
+<li onclick="openWindow('aboutWindow')">TEAM</li>
+<li onclick="openWindow('comingWindow')">COMING GAMES</li>
+<li onclick="openWindow('privacyWindow')">PRIVACY</li>
+<li onclick="openWindow('copyrightWindow')">COPYRIGHT</li>
 <li onclick="openDiscord()">DISCORD</li>
 </ul>
 </nav>
 
 <section class="hero">
-<div class="subtitle">JAMALSARCHIVE PRESENTS</div>
 <h1>LETHAL APE</h1>
 <div class="rating">★★★★★ 4.8 – 200+ Reviews on Meta Quest</div>
 
 <div class="download">
-<!-- PUT YOUR IMAGE LINK BELOW -->
-<img src="PUT-IMAGE-LINK-HERE.jpg">
-<br>
 <a href="https://www.meta.com/en-gb/experiences/lethal-ape/25282688598014625/?require_login=true" target="_blank">
 Download on Meta Quest
 </a>
+
+<img src="e0599011-572b-47be-aeef-08ced0c98f8f.jpg">
 </div>
 </section>
 
-<div class="settings-btn" onclick="openSettings()">⚙</div>
+<div class="settings-btn" onclick="openWindow('settingsWindow')">⚙</div>
 
 <!-- SETTINGS -->
 <div class="window" id="settingsWindow">
-<div class="window-header" onmousedown="dragElement(this.parentElement)">Display Properties</div>
+<div class="window-header" onmousedown="dragElement(this.parentElement)">
+Display Properties
+<div class="close-btn" onclick="closeWindow('settingsWindow')">X</div>
+</div>
 <div class="window-content">
+
 <p>Desktop Color</p>
 
-<!-- MORE COLORS ADDED -->
-<div class="color-option" style="background:#000" onclick="changeColor('#000')"></div>
-<div class="color-option" style="background:#0d1117" onclick="changeColor('#0d1117')"></div>
-<div class="color-option" style="background:#111111" onclick="changeColor('#111111')"></div>
-<div class="color-option" style="background:#001f3f" onclick="changeColor('#001f3f')"></div>
-<div class="color-option" style="background:#300000" onclick="changeColor('#300000')"></div>
-<div class="color-option" style="background:#1b0033" onclick="changeColor('#1b0033')"></div>
-<div class="color-option" style="background:#002b36" onclick="changeColor('#002b36')"></div>
+<div class="color-option" style="background:#000" onclick="setTheme('#000','#111')"></div>
+<div class="color-option" style="background:#001f3f" onclick="setTheme('#001f3f','#002b5c')"></div>
+<div class="color-option" style="background:#300000" onclick="setTheme('#300000','#4d0000')"></div>
+<div class="color-option" style="background:#1b0033" onclick="setTheme('#1b0033','#330066')"></div>
+<div class="color-option" style="background:#002b36" onclick="setTheme('#002b36','#073642')"></div>
+
+<br><br>
+<p>White Mode</p>
+<div class="color-option" style="background:white;border:1px solid black;"
+onclick="whiteMode()"></div>
 
 </div>
 </div>
 
 <!-- ABOUT -->
 <div class="window" id="aboutWindow">
-<div class="window-header" onmousedown="dragElement(this.parentElement)">About The Owner</div>
+<div class="window-header" onmousedown="dragElement(this.parentElement)">
+About The Owner
+<div class="close-btn" onclick="closeWindow('aboutWindow')">X</div>
+</div>
 <div class="window-content">
-<h2>Jamal</h2>
-<br>
+<h2>Jamal</h2><br>
 Unity<br>
 Blender<br>
 Python & C#<br>
@@ -225,62 +247,101 @@ Website Design
 </div>
 </div>
 
+<!-- COMING -->
+<div class="window" id="comingWindow">
+<div class="window-header" onmousedown="dragElement(this.parentElement)">
+Coming Games
+<div class="close-btn" onclick="closeWindow('comingWindow')">X</div>
+</div>
+<div class="window-content">
+Lethal Ape Redux OG<br>
+More VR Horror Titles Coming Soon...
+</div>
+</div>
+
 <!-- PRIVACY -->
 <div class="window" id="privacyWindow">
-<div class="window-header" onmousedown="dragElement(this.parentElement)">Privacy Policy</div>
-<div class="window-content">
-This website does not collect personal data.
+<div class="window-header" onmousedown="dragElement(this.parentElement)">
+Privacy Policy
+<div class="close-btn" onclick="closeWindow('privacyWindow')">X</div>
 </div>
+<div class="window-content">
+No personal data is collected on this site.
+</div>
+</div>
+
+<!-- COPYRIGHT -->
+<div class="window" id="copyrightWindow">
+<div class="window-header" onmousedown="dragElement(this.parentElement)">
+Copyright
+<div class="close-btn" onclick="closeWindow('copyrightWindow')">X</div>
+</div>
+<div class="window-content">
+© 2026 JamalsArchive. All Rights Reserved.
+</div>
+</div>
+
+<!-- MUSIC -->
+<div class="music-player">
+<audio id="bgMusic" loop autoplay>
+<source src="YOUR-MUSIC.mp3" type="audio/mpeg">
+</audio>
+<input type="range" min="0" max="1" step="0.01" value="0.5"
+oninput="document.getElementById('bgMusic').volume=this.value">
 </div>
 
 <script>
-function openSettings(){
-document.getElementById("settingsWindow").style.display="block";
+function openWindow(id){
+let el=document.getElementById(id);
+el.style.display = (el.style.display==="block")?"none":"block";
 }
 
-function openAbout(){
-document.getElementById("aboutWindow").style.display="block";
-}
-
-function openPrivacy(){
-document.getElementById("privacyWindow").style.display="block";
+function closeWindow(id){
+document.getElementById(id).style.display="none";
 }
 
 function openDiscord(){
-window.open("https://discord.gg/Dbac2yg7MQ", "_blank");
+window.open("https://discord.gg/Dbac2yg7MQ","_blank");
 }
 
-function changeColor(color){
-document.body.style.background=color;
+function setTheme(bg,navColor){
+document.body.style.background=bg;
+document.querySelector("nav").style.background=
+"linear-gradient(to right,"+bg+","+navColor+")";
 }
 
-/* FIXED DRAG SYSTEM */
+function whiteMode(){
+document.body.style.background="white";
+document.body.style.color="black";
+document.querySelector("nav").style.background="linear-gradient(to right,#fff,#ddd)";
+}
+
+/* DRAG FIXED */
 function dragElement(elmnt){
 let pos1=0,pos2=0,pos3=0,pos4=0;
-
-elmnt.onmousedown = dragMouseDown;
+elmnt.onmousedown=dragMouseDown;
 
 function dragMouseDown(e){
 e.preventDefault();
-pos3 = e.clientX;
-pos4 = e.clientY;
-document.onmouseup = closeDragElement;
-document.onmousemove = elementDrag;
+pos3=e.clientX;
+pos4=e.clientY;
+document.onmouseup=closeDrag;
+document.onmousemove=elementDrag;
 }
 
 function elementDrag(e){
 e.preventDefault();
-pos1 = pos3 - e.clientX;
-pos2 = pos4 - e.clientY;
-pos3 = e.clientX;
-pos4 = e.clientY;
-elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+pos1=pos3-e.clientX;
+pos2=pos4-e.clientY;
+pos3=e.clientX;
+pos4=e.clientY;
+elmnt.style.top=(elmnt.offsetTop-pos2)+"px";
+elmnt.style.left=(elmnt.offsetLeft-pos1)+"px";
 }
 
-function closeDragElement(){
-document.onmouseup = null;
-document.onmousemove = null;
+function closeDrag(){
+document.onmouseup=null;
+document.onmousemove=null;
 }
 }
 </script>
