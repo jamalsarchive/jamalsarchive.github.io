@@ -29,7 +29,13 @@ justify-content:space-between;
 align-items:center;
 background:linear-gradient(to right,#000,#111);
 z-index:1000;
-transition:0.3s;
+transition:0.4s;
+}
+
+.brand{
+font-weight:800;
+font-size:22px;
+text-shadow:0 0 15px white;
 }
 
 nav ul{
@@ -60,30 +66,38 @@ text-align:center;
 padding-top:80px;
 }
 
-.hero h1{
-font-size:110px;
-text-shadow:
-0 0 40px white,
-0 0 80px white,
-0 0 140px white;
+.presents{
+font-size:28px;
+letter-spacing:4px;
+opacity:0;
+animation:fadeIn 1.5s forwards;
+}
+
+.title{
+font-size:120px;
+margin-top:10px;
+opacity:0;
+animation:fadeIn 2s forwards 0.5s;
+text-shadow:0 0 40px white,0 0 80px white,0 0 140px white;
 transition:0.3s;
 }
 
-.hero h1:hover{
-text-shadow:
-0 0 80px white,
-0 0 160px white,
-0 0 240px white;
+.title:hover{
+text-shadow:0 0 80px white,0 0 160px white,0 0 240px white;
+transform:scale(1.03);
 }
 
 .rating{
 margin-top:25px;
 font-size:18px;
+opacity:0;
+animation:fadeIn 2s forwards 1s;
 }
 
 .download{
-margin-top:30px;
-text-align:center;
+margin-top:35px;
+opacity:0;
+animation:fadeIn 2s forwards 1.5s;
 }
 
 .download a{
@@ -99,19 +113,26 @@ transition:0.3s;
 
 .download a:hover{
 transform:scale(1.05);
+box-shadow:0 0 25px white;
 }
 
 .download img{
 width:450px;
 margin-top:25px;
 border-radius:15px;
-box-shadow:0 0 30px rgba(0,0,0,0.6);
+box-shadow:0 0 30px rgba(0,0,0,0.4);
+transition:0.4s;
+}
+
+.download img:hover{
+transform:scale(1.02);
+box-shadow:0 0 50px white;
 }
 
 /* SETTINGS BUTTON */
 .settings-btn{
 position:fixed;
-left:15px;
+left:20px;
 top:50%;
 transform:translateY(-50%);
 background:#222;
@@ -127,7 +148,7 @@ position:fixed;
 top:150px;
 left:200px;
 width:450px;
-background:#1a1a1a;
+background:#111;
 border:1px solid #333;
 border-radius:12px;
 display:none;
@@ -167,7 +188,7 @@ border:1px solid #555;
 position:fixed;
 bottom:20px;
 right:20px;
-background:#222;
+background:#111;
 padding:15px;
 border-radius:12px;
 z-index:2000;
@@ -176,13 +197,18 @@ z-index:2000;
 .music-player input{
 width:150px;
 }
+
+/* ANIMATION */
+@keyframes fadeIn{
+to{opacity:1;}
+}
 </style>
 </head>
 
 <body>
 
 <nav>
-<div>JamalsArchive Presents</div>
+<div class="brand">JamalsArchive</div>
 <ul>
 <li onclick="toggleWindow('aboutWindow')">TEAM</li>
 <li onclick="toggleWindow('comingWindow')">COMING GAMES</li>
@@ -193,21 +219,25 @@ width:150px;
 </nav>
 
 <section class="hero">
-<h1>LETHAL APE</h1>
-<div class="rating">★★★★★ 4.8 – 200+ Reviews on Meta Quest</div>
+
+<div class="presents">JamalsArchive Presents</div>
+<h1 class="title">LETHAL APE</h1>
+
+<div class="rating">
+★★★★★ 4.8 – 200+ Reviews on Meta Quest
+</div>
 
 <div class="download">
 <a href="https://www.meta.com/en-gb/experiences/lethal-ape/25282688598014625/?require_login=true" target="_blank">
-Download on Meta Quest
+Download
 </a>
-
 <img src="lethalape.jpg">
 </div>
+
 </section>
 
 <div class="settings-btn" onclick="toggleWindow('settingsWindow')">⚙</div>
 
-<!-- SETTINGS -->
 <div class="window" id="settingsWindow">
 <div class="window-header">
 Display Properties
@@ -220,13 +250,11 @@ Display Properties
 <div class="color-option" style="background:#001f3f" onclick="setTheme('#001f3f','#002b5c')"></div>
 <div class="color-option" style="background:#300000" onclick="setTheme('#300000','#4d0000')"></div>
 <div class="color-option" style="background:#1b0033" onclick="setTheme('#1b0033','#330066')"></div>
-<div class="color-option" style="background:#003300" onclick="setTheme('#003300','#005500')"></div>
-<div class="color-option" style="background:#002222" onclick="setTheme('#002222','#004444')"></div>
+<div class="color-option" style="background:#002b00" onclick="setTheme('#002b00','#004d00')"></div>
 
 </div>
 </div>
 
-<!-- OTHER WINDOWS -->
 <div class="window" id="aboutWindow">
 <div class="window-header">
 About The Owner
@@ -236,7 +264,8 @@ About The Owner
 <h2>Jamal</h2><br>
 Unity<br>
 Blender<br>
-Python & C#
+Python & C#<br>
+Website Design
 </div>
 </div>
 
@@ -276,7 +305,7 @@ Copyright
 <source src="have to..mp3" type="audio/mpeg">
 </audio>
 <input type="range" min="0" max="1" step="0.01" value="0.5"
-oninput="bgMusic.volume=this.value">
+oninput="document.getElementById('bgMusic').volume=this.value">
 </div>
 
 <script>
@@ -293,36 +322,45 @@ function openDiscord(){
 window.open("https://discord.gg/Dbac2yg7MQ","_blank");
 }
 
-/* THEMES */
-function setTheme(bg,nav){
+function setTheme(bg,navColor){
 document.body.style.background=bg;
 document.querySelector("nav").style.background=
-"linear-gradient(to right,"+bg+","+nav+")";
+"linear-gradient(to right,"+bg+","+navColor+")";
 }
 
-/* PERFECT DRAG */
-document.querySelectorAll(".window").forEach(win=>{
-let header=win.querySelector(".window-header");
-header.addEventListener("mousedown",function(e){
-let offsetX=e.clientX-win.offsetLeft;
-let offsetY=e.clientY-win.offsetTop;
-
-function move(e2){
-win.style.left=(e2.clientX-offsetX)+"px";
-win.style.top=(e2.clientY-offsetY)+"px";
-}
-
-document.addEventListener("mousemove",move);
-document.addEventListener("mouseup",()=>document.removeEventListener("mousemove",move),{once:true});
-});
-});
-
-/* START MUSIC ON FIRST CLICK (NO RANDOM PAUSE) */
-document.addEventListener("click", function startMusic(){
+document.addEventListener("click",function startMusic(){
 let music=document.getElementById("bgMusic");
 music.volume=0.5;
 music.play();
 document.removeEventListener("click",startMusic);
+});
+
+/* PERFECT DRAG */
+document.querySelectorAll(".window").forEach(win=>{
+let header=win.querySelector(".window-header");
+
+header.onmousedown=function(e){
+e.preventDefault();
+
+let shiftX=e.clientX-win.getBoundingClientRect().left;
+let shiftY=e.clientY-win.getBoundingClientRect().top;
+
+function moveAt(pageX,pageY){
+win.style.left=pageX-shiftX+'px';
+win.style.top=pageY-shiftY+'px';
+}
+
+function onMouseMove(e){
+moveAt(e.pageX,e.pageY);
+}
+
+document.addEventListener('mousemove',onMouseMove);
+
+document.onmouseup=function(){
+document.removeEventListener('mousemove',onMouseMove);
+document.onmouseup=null;
+};
+};
 });
 </script>
 
