@@ -5,199 +5,257 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JamalsArchive</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+<!-- Futuristic Font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+    font-family:'Orbitron', sans-serif;
 }
 
 body{
-    background:#0d1117;
-    color:#e6edf3;
-    text-align:center;
+    background:#000;
+    color:white;
     overflow-x:hidden;
 }
 
-/* NAV */
+/* NAVBAR */
 nav{
-    width:100%;
-    padding:20px 0;
     position:fixed;
-    top:0;
-    background:rgba(13,17,23,0.9);
+    width:100%;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(0,0,0,0.8);
     backdrop-filter:blur(10px);
+    z-index:1000;
 }
 
-nav a{
-    color:#8b949e;
-    text-decoration:none;
-    margin:0 20px;
-    font-weight:500;
+.logo{
+    font-weight:800;
+    font-size:20px;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:40px;
+}
+
+nav ul li{
+    cursor:pointer;
+    opacity:0.7;
     transition:0.3s;
 }
 
-nav a:hover{
-    color:white;
+nav ul li:hover{
+    opacity:1;
+    text-shadow:0 0 10px white;
 }
 
-/* HERO */
+/* HERO SECTION */
 .hero{
     height:100vh;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    padding:0 20px;
+    text-align:center;
+}
+
+.subtitle{
+    letter-spacing:4px;
+    font-size:14px;
+    opacity:0.6;
+    margin-bottom:20px;
 }
 
 .hero h1{
-    font-size:70px;
+    font-size:110px;
     font-weight:800;
-}
-
-.hero h2{
-    font-size:30px;
-    color:#8b949e;
-    margin:10px 0 20px;
-}
-
-.hero p{
-    max-width:600px;
-    color:#8b949e;
-    margin-bottom:30px;
-}
-
-.btn{
-    padding:12px 30px;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:600;
-    margin:10px;
+    text-shadow:
+        0 0 20px white,
+        0 0 40px white,
+        0 0 80px white;
     transition:0.3s;
 }
 
-.btn-primary{
-    background:white;
-    color:black;
+.hero h1:hover{
+    text-shadow:
+        0 0 40px white,
+        0 0 80px white,
+        0 0 120px white;
 }
 
-.btn-primary:hover{
-    background:#ccc;
+.rating{
+    margin-top:30px;
+    opacity:0.7;
 }
 
-.btn-outline{
-    border:1px solid white;
-    color:white;
-}
-
-.btn-outline:hover{
-    background:white;
-    color:black;
-}
-
-/* SECTIONS */
-section{
-    padding:120px 20px;
-}
-
-section h2{
-    font-size:40px;
-    margin-bottom:40px;
-}
-
-.card{
-    background:#161b22;
-    padding:30px;
+/* SETTINGS BUTTON (SIDE) */
+.settings-btn{
+    position:fixed;
+    left:15px;
+    top:50%;
+    transform:translateY(-50%);
+    background:#111;
+    padding:15px;
     border-radius:12px;
-    max-width:700px;
-    margin:20px auto;
-    transition:0.3s;
+    cursor:pointer;
+    z-index:2000;
+    box-shadow:0 0 10px rgba(255,255,255,0.2);
 }
 
-.card:hover{
-    transform:translateY(-5px);
+/* WINDOW STYLE */
+.window{
+    position:fixed;
+    top:120px;
+    left:50%;
+    transform:translateX(-50%);
+    width:420px;
+    background:#0a0a0a;
+    border:1px solid #333;
+    border-radius:12px;
+    display:none;
+    z-index:3000;
+    box-shadow:0 0 25px rgba(255,255,255,0.1);
 }
 
-/* FOOTER */
-footer{
-    padding:40px 0;
-    color:#8b949e;
+.window-header{
+    padding:12px;
+    background:#111;
+    cursor:move;
+    font-weight:600;
+    border-bottom:1px solid #222;
+}
+
+.window-content{
+    padding:20px;
+}
+
+.color-option{
+    width:30px;
+    height:30px;
+    display:inline-block;
+    margin:8px;
+    cursor:pointer;
+    border-radius:6px;
+    border:1px solid #333;
+}
+
+/* MUSIC PLAYER */
+.music-player{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#111;
+    padding:15px;
+    border-radius:12px;
+}
+
+.music-player input{
+    width:150px;
 }
 </style>
 </head>
 <body>
 
 <nav>
-    <a href="#home">Home</a>
-    <a href="#games">Games</a>
-    <a href="#discord">Discord</a>
-    <a href="#credits">Credits</a>
+<div class="logo">JamalsArchive</div>
+<ul>
+<li>HOME</li>
+<li onclick="openAbout()">TEAM</li>
+<li>PRIVACY</li>
+<li onclick="scrollToDiscord()">DISCORD</li>
+</ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
-    <h1>JamalsArchive</h1>
-    <h2>VR Horror Game Development Studio</h2>
-    <p>
-        We create VR horror games using advanced Gorilla Tag-style locomotion.
-        Developers of Lethal Ape and creators of Collie-Tools.
-    </p>
-
-    <div>
-        <a href="#games" class="btn btn-primary">View Games</a>
-        <a href="#discord" class="btn btn-outline">Join Discord</a>
-    </div>
+<section class="hero">
+<div class="subtitle">JAMALSARCHIVE PRESENTS</div>
+<h1>LETHAL APE</h1>
+<div class="rating">★★★★★ 3.9 – 300+ Reviews on Meta Quest</div>
 </section>
 
-<!-- GAMES -->
-<section id="games">
-    <h2>Our Games</h2>
+<!-- SETTINGS SIDE BUTTON -->
+<div class="settings-btn" onclick="openSettings()">⚙</div>
 
-    <div class="card">
-        <h3>Lethal Ape</h3>
-        <p>VR horror experience built with custom movement systems.</p>
-    </div>
+<!-- SETTINGS WINDOW -->
+<div class="window" id="settingsWindow">
+<div class="window-header" onmousedown="dragElement(this.parentElement)">Display Properties</div>
+<div class="window-content">
+<p>Desktop Color</p>
+<div class="color-option" style="background:#000" onclick="changeColor('#000')"></div>
+<div class="color-option" style="background:#0d1117" onclick="changeColor('#0d1117')"></div>
+<div class="color-option" style="background:#111111" onclick="changeColor('#111111')"></div>
+<div class="color-option" style="background:#001f3f" onclick="changeColor('#001f3f')"></div>
+</div>
+</div>
 
-    <div class="card">
-        <h3>Lethal Ape Redux OG</h3>
-        <p>Coming soon...</p>
-    </div>
-</section>
+<!-- ABOUT OWNER WINDOW -->
+<div class="window" id="aboutWindow">
+<div class="window-header" onmousedown="dragElement(this.parentElement)">About The Owner</div>
+<div class="window-content">
+<h2>Jamal</h2>
+<br>
+Unity<br>
+Blender<br>
+Python & C#<br>
+Website Design
+</div>
+</div>
 
-<!-- DISCORD -->
-<section id="discord">
-    <h2>Join Our Discord</h2>
+<!-- MUSIC -->
+<div class="music-player">
+<audio id="bgMusic" loop autoplay>
+<source src="YOUR-MUSIC.mp3" type="audio/mpeg">
+</audio>
+<input type="range" min="0" max="1" step="0.01" value="0.5"
+oninput="document.getElementById('bgMusic').volume=this.value">
+</div>
 
-    <div class="card">
-        <p>Stay updated with announcements and development progress.</p>
+<script>
+function openSettings(){
+document.getElementById("settingsWindow").style.display="block";
+}
 
-        <a href="https://discord.gg/Dbac2yg7MQ"
-           class="btn btn-primary"
-           target="_blank">
-           Join Now
-        </a>
-    </div>
-</section>
+function openAbout(){
+document.getElementById("aboutWindow").style.display="block";
+}
 
-<!-- CREDITS -->
-<section id="credits">
-    <h2>Credits</h2>
+function changeColor(color){
+document.body.style.background=color;
+}
 
-    <div class="card">
-        <p><strong>Owner:</strong> Jamal</p>
-        <p><strong>Developer:</strong> Valkyrie</p>
-        <p><strong>Discord Manager:</strong> Loffy</p>
-        <p><strong>Special Thanks:</strong> Friends who helped with code</p>
-    </div>
-</section>
+function scrollToDiscord(){
+window.scrollTo({top:window.innerHeight,behavior:'smooth'});
+}
 
-<footer>
-    © 2026 JamalsArchive. All rights reserved.
-</footer>
+/* DRAG SYSTEM */
+function dragElement(elmnt){
+var pos1=0,pos2=0,pos3=0,pos4=0;
+document.onmouseup=closeDrag;
+document.onmousemove=drag;
+
+function drag(e){
+e=e||window.event;
+pos1=pos3-e.clientX;
+pos2=pos4-e.clientY;
+pos3=e.clientX;
+pos4=e.clientY;
+elmnt.style.top=(elmnt.offsetTop-pos2)+"px";
+elmnt.style.left=(elmnt.offsetLeft-pos1)+"px";
+}
+
+function closeDrag(){
+document.onmouseup=null;
+document.onmousemove=null;
+}
+}
+</script>
 
 </body>
 </html>
