@@ -11,19 +11,15 @@ margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Orbitron',sans-serif;
-transition:0.25s;
 }
 
-body.dark{
+body{
 background:#000;
 color:white;
+overflow-x:hidden;
 }
 
-body.light{
-background:white;
-color:black;
-}
-
+/* NAV */
 nav{
 position:fixed;
 width:100%;
@@ -33,10 +29,7 @@ justify-content:space-between;
 align-items:center;
 background:linear-gradient(to right,#000,#111);
 z-index:1000;
-}
-
-body.light nav{
-background:linear-gradient(to right,#fff,#ddd);
+transition:0.3s;
 }
 
 nav ul{
@@ -48,10 +41,12 @@ gap:40px;
 nav li{
 cursor:pointer;
 opacity:0.8;
+transition:0.3s;
 }
 
 nav li:hover{
 opacity:1;
+text-shadow:0 0 15px white,0 0 25px white;
 }
 
 /* HERO */
@@ -67,26 +62,18 @@ padding-top:80px;
 
 .hero h1{
 font-size:110px;
-}
-
-body.dark .hero h1{
 text-shadow:
 0 0 40px white,
 0 0 80px white,
 0 0 140px white;
+transition:0.3s;
 }
 
-body.dark .hero h1:hover{
+.hero h1:hover{
 text-shadow:
 0 0 80px white,
 0 0 160px white,
 0 0 240px white;
-}
-
-body.light .hero h1{
-text-shadow:
-0 0 30px black,
-0 0 60px black;
 }
 
 .rating{
@@ -102,23 +89,23 @@ text-align:center;
 .download a{
 display:inline-block;
 padding:14px 35px;
-background:black;
-color:white;
+background:white;
+color:black;
 border-radius:10px;
 text-decoration:none;
 font-weight:600;
+transition:0.3s;
 }
 
-body.dark .download a{
-background:white;
-color:black;
+.download a:hover{
+transform:scale(1.05);
 }
 
 .download img{
 width:450px;
 margin-top:25px;
 border-radius:15px;
-box-shadow:0 0 30px rgba(0,0,0,0.4);
+box-shadow:0 0 30px rgba(0,0,0,0.6);
 }
 
 /* SETTINGS BUTTON */
@@ -147,11 +134,6 @@ display:none;
 z-index:3000;
 }
 
-body.light .window{
-background:#f2f2f2;
-color:black;
-}
-
 .window-header{
 padding:12px;
 background:#222;
@@ -159,10 +141,6 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 cursor:grab;
-}
-
-body.light .window-header{
-background:#ddd;
 }
 
 .close-btn{
@@ -201,10 +179,10 @@ width:150px;
 </style>
 </head>
 
-<body class="dark">
+<body>
 
 <nav>
-<div>JamalsArchive</div>
+<div>JamalsArchive Presents</div>
 <ul>
 <li onclick="toggleWindow('aboutWindow')">TEAM</li>
 <li onclick="toggleWindow('comingWindow')">COMING GAMES</li>
@@ -223,7 +201,6 @@ width:150px;
 Download on Meta Quest
 </a>
 
-<!-- PUT YOUR IMAGE FILE NAME HERE -->
 <img src="lethalape.jpg">
 </div>
 </section>
@@ -232,40 +209,40 @@ Download on Meta Quest
 
 <!-- SETTINGS -->
 <div class="window" id="settingsWindow">
-<div class="window-header">Display Properties
+<div class="window-header">
+Display Properties
 <span class="close-btn" onclick="closeWindow('settingsWindow')">X</span>
 </div>
 <div class="window-content">
 <p>Background Themes</p>
 
-<div class="color-option" style="background:#000" onclick="setDark()"></div>
-<div class="color-option" style="background:#001f3f" onclick="setCustom('#001f3f','#002b5c')"></div>
-<div class="color-option" style="background:#300000" onclick="setCustom('#300000','#4d0000')"></div>
-<div class="color-option" style="background:#1b0033" onclick="setCustom('#1b0033','#330066')"></div>
-
-<br><br>
-<p>White Mode</p>
-<div class="color-option" style="background:white;border:1px solid black;" onclick="setLight()"></div>
+<div class="color-option" style="background:#000" onclick="setTheme('#000','#111')"></div>
+<div class="color-option" style="background:#001f3f" onclick="setTheme('#001f3f','#002b5c')"></div>
+<div class="color-option" style="background:#300000" onclick="setTheme('#300000','#4d0000')"></div>
+<div class="color-option" style="background:#1b0033" onclick="setTheme('#1b0033','#330066')"></div>
+<div class="color-option" style="background:#003300" onclick="setTheme('#003300','#005500')"></div>
+<div class="color-option" style="background:#002222" onclick="setTheme('#002222','#004444')"></div>
 
 </div>
 </div>
 
 <!-- OTHER WINDOWS -->
 <div class="window" id="aboutWindow">
-<div class="window-header">About The Owner
+<div class="window-header">
+About The Owner
 <span class="close-btn" onclick="closeWindow('aboutWindow')">X</span>
 </div>
 <div class="window-content">
 <h2>Jamal</h2><br>
 Unity<br>
 Blender<br>
-Python & C#<br>
-Website Design
+Python & C#
 </div>
 </div>
 
 <div class="window" id="comingWindow">
-<div class="window-header">Coming Games
+<div class="window-header">
+Coming Games
 <span class="close-btn" onclick="closeWindow('comingWindow')">X</span>
 </div>
 <div class="window-content">
@@ -275,7 +252,8 @@ More Coming Soon...
 </div>
 
 <div class="window" id="privacyWindow">
-<div class="window-header">Privacy Policy
+<div class="window-header">
+Privacy Policy
 <span class="close-btn" onclick="closeWindow('privacyWindow')">X</span>
 </div>
 <div class="window-content">
@@ -284,7 +262,8 @@ No personal data is collected.
 </div>
 
 <div class="window" id="copyrightWindow">
-<div class="window-header">Copyright
+<div class="window-header">
+Copyright
 <span class="close-btn" onclick="closeWindow('copyrightWindow')">X</span>
 </div>
 <div class="window-content">
@@ -293,7 +272,7 @@ No personal data is collected.
 </div>
 
 <div class="music-player">
-<audio id="bgMusic" loop autoplay>
+<audio id="bgMusic" loop>
 <source src="have to..mp3" type="audio/mpeg">
 </audio>
 <input type="range" min="0" max="1" step="0.01" value="0.5"
@@ -315,16 +294,7 @@ window.open("https://discord.gg/Dbac2yg7MQ","_blank");
 }
 
 /* THEMES */
-function setLight(){
-document.body.className="light";
-}
-
-function setDark(){
-document.body.className="dark";
-}
-
-function setCustom(bg,nav){
-document.body.className="dark";
+function setTheme(bg,nav){
 document.body.style.background=bg;
 document.querySelector("nav").style.background=
 "linear-gradient(to right,"+bg+","+nav+")";
@@ -343,10 +313,16 @@ win.style.top=(e2.clientY-offsetY)+"px";
 }
 
 document.addEventListener("mousemove",move);
-document.addEventListener("mouseup",()=>{
-document.removeEventListener("mousemove",move);
+document.addEventListener("mouseup",()=>document.removeEventListener("mousemove",move),{once:true});
 });
 });
+
+/* START MUSIC ON FIRST CLICK (NO RANDOM PAUSE) */
+document.addEventListener("click", function startMusic(){
+let music=document.getElementById("bgMusic");
+music.volume=0.5;
+music.play();
+document.removeEventListener("click",startMusic);
 });
 </script>
 
