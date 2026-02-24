@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>JamalsArchive</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -12,16 +11,19 @@ margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Orbitron',sans-serif;
-transition:0.3s;
+transition:0.25s;
 }
 
-body{
+body.dark{
 background:#000;
 color:white;
-overflow-x:hidden;
 }
 
-/* NAV */
+body.light{
+background:white;
+color:black;
+}
+
 nav{
 position:fixed;
 width:100%;
@@ -33,6 +35,10 @@ background:linear-gradient(to right,#000,#111);
 z-index:1000;
 }
 
+body.light nav{
+background:linear-gradient(to right,#fff,#ddd);
+}
+
 nav ul{
 list-style:none;
 display:flex;
@@ -41,15 +47,11 @@ gap:40px;
 
 nav li{
 cursor:pointer;
-opacity:0.7;
+opacity:0.8;
 }
 
 nav li:hover{
 opacity:1;
-text-shadow:
-0 0 10px white,
-0 0 20px white,
-0 0 40px white;
 }
 
 /* HERO */
@@ -65,49 +67,58 @@ padding-top:80px;
 
 .hero h1{
 font-size:110px;
-text-shadow:
-0 0 30px white,
-0 0 60px white,
-0 0 100px white;
 }
 
-.hero h1:hover{
+body.dark .hero h1{
 text-shadow:
-0 0 60px white,
-0 0 120px white,
-0 0 200px white;
+0 0 40px white,
+0 0 80px white,
+0 0 140px white;
+}
+
+body.dark .hero h1:hover{
+text-shadow:
+0 0 80px white,
+0 0 160px white,
+0 0 240px white;
+}
+
+body.light .hero h1{
+text-shadow:
+0 0 30px black,
+0 0 60px black;
 }
 
 .rating{
-margin-top:30px;
+margin-top:25px;
 font-size:18px;
 }
 
-/* DOWNLOAD */
 .download{
 margin-top:30px;
 text-align:center;
 }
 
-.download img{
-width:500px;
-border-radius:15px;
-box-shadow:0 0 40px rgba(255,255,255,0.2);
-margin-top:20px;
-}
-
 .download a{
 display:inline-block;
 padding:14px 35px;
-background:white;
-color:black;
+background:black;
+color:white;
 border-radius:10px;
-font-weight:600;
 text-decoration:none;
+font-weight:600;
 }
 
-.download a:hover{
-background:#ccc;
+body.dark .download a{
+background:white;
+color:black;
+}
+
+.download img{
+width:450px;
+margin-top:25px;
+border-radius:15px;
+box-shadow:0 0 30px rgba(0,0,0,0.4);
 }
 
 /* SETTINGS BUTTON */
@@ -116,7 +127,7 @@ position:fixed;
 left:15px;
 top:50%;
 transform:translateY(-50%);
-background:#111;
+background:#222;
 padding:15px;
 border-radius:12px;
 cursor:pointer;
@@ -129,25 +140,33 @@ position:fixed;
 top:150px;
 left:200px;
 width:450px;
-background:#111;
+background:#1a1a1a;
 border:1px solid #333;
 border-radius:12px;
 display:none;
 z-index:3000;
 }
 
+body.light .window{
+background:#f2f2f2;
+color:black;
+}
+
 .window-header{
 padding:12px;
-background:#1a1a1a;
+background:#222;
 display:flex;
 justify-content:space-between;
 align-items:center;
-cursor:move;
+cursor:grab;
+}
+
+body.light .window-header{
+background:#ddd;
 }
 
 .close-btn{
 cursor:pointer;
-color:red;
 font-weight:bold;
 }
 
@@ -159,10 +178,10 @@ padding:20px;
 width:30px;
 height:30px;
 display:inline-block;
-margin:8px;
+margin:6px;
 cursor:pointer;
 border-radius:6px;
-border:1px solid #333;
+border:1px solid #555;
 }
 
 /* MUSIC */
@@ -170,25 +189,27 @@ border:1px solid #333;
 position:fixed;
 bottom:20px;
 right:20px;
-background:#111;
+background:#222;
 padding:15px;
 border-radius:12px;
 z-index:2000;
 }
+
 .music-player input{
 width:150px;
 }
 </style>
 </head>
-<body>
+
+<body class="dark">
 
 <nav>
 <div>JamalsArchive</div>
 <ul>
-<li onclick="openWindow('aboutWindow')">TEAM</li>
-<li onclick="openWindow('comingWindow')">COMING GAMES</li>
-<li onclick="openWindow('privacyWindow')">PRIVACY</li>
-<li onclick="openWindow('copyrightWindow')">COPYRIGHT</li>
+<li onclick="toggleWindow('aboutWindow')">TEAM</li>
+<li onclick="toggleWindow('comingWindow')">COMING GAMES</li>
+<li onclick="toggleWindow('privacyWindow')">PRIVACY</li>
+<li onclick="toggleWindow('copyrightWindow')">COPYRIGHT</li>
 <li onclick="openDiscord()">DISCORD</li>
 </ul>
 </nav>
@@ -202,41 +223,37 @@ width:150px;
 Download on Meta Quest
 </a>
 
-<img src="e0599011-572b-47be-aeef-08ced0c98f8f.jpg">
+<!-- PUT YOUR IMAGE FILE NAME HERE -->
+<img src="lethalape.jpg">
 </div>
 </section>
 
-<div class="settings-btn" onclick="openWindow('settingsWindow')">⚙</div>
+<div class="settings-btn" onclick="toggleWindow('settingsWindow')">⚙</div>
 
 <!-- SETTINGS -->
 <div class="window" id="settingsWindow">
-<div class="window-header" onmousedown="dragElement(this.parentElement)">
-Display Properties
-<div class="close-btn" onclick="closeWindow('settingsWindow')">X</div>
+<div class="window-header">Display Properties
+<span class="close-btn" onclick="closeWindow('settingsWindow')">X</span>
 </div>
 <div class="window-content">
+<p>Background Themes</p>
 
-<p>Desktop Color</p>
-
-<div class="color-option" style="background:#000" onclick="setTheme('#000','#111')"></div>
-<div class="color-option" style="background:#001f3f" onclick="setTheme('#001f3f','#002b5c')"></div>
-<div class="color-option" style="background:#300000" onclick="setTheme('#300000','#4d0000')"></div>
-<div class="color-option" style="background:#1b0033" onclick="setTheme('#1b0033','#330066')"></div>
-<div class="color-option" style="background:#002b36" onclick="setTheme('#002b36','#073642')"></div>
+<div class="color-option" style="background:#000" onclick="setDark()"></div>
+<div class="color-option" style="background:#001f3f" onclick="setCustom('#001f3f','#002b5c')"></div>
+<div class="color-option" style="background:#300000" onclick="setCustom('#300000','#4d0000')"></div>
+<div class="color-option" style="background:#1b0033" onclick="setCustom('#1b0033','#330066')"></div>
 
 <br><br>
 <p>White Mode</p>
-<div class="color-option" style="background:white;border:1px solid black;"
-onclick="whiteMode()"></div>
+<div class="color-option" style="background:white;border:1px solid black;" onclick="setLight()"></div>
 
 </div>
 </div>
 
-<!-- ABOUT -->
+<!-- OTHER WINDOWS -->
 <div class="window" id="aboutWindow">
-<div class="window-header" onmousedown="dragElement(this.parentElement)">
-About The Owner
-<div class="close-btn" onclick="closeWindow('aboutWindow')">X</div>
+<div class="window-header">About The Owner
+<span class="close-btn" onclick="closeWindow('aboutWindow')">X</span>
 </div>
 <div class="window-content">
 <h2>Jamal</h2><br>
@@ -247,53 +264,46 @@ Website Design
 </div>
 </div>
 
-<!-- COMING -->
 <div class="window" id="comingWindow">
-<div class="window-header" onmousedown="dragElement(this.parentElement)">
-Coming Games
-<div class="close-btn" onclick="closeWindow('comingWindow')">X</div>
+<div class="window-header">Coming Games
+<span class="close-btn" onclick="closeWindow('comingWindow')">X</span>
 </div>
 <div class="window-content">
 Lethal Ape Redux OG<br>
-More VR Horror Titles Coming Soon...
+More Coming Soon...
 </div>
 </div>
 
-<!-- PRIVACY -->
 <div class="window" id="privacyWindow">
-<div class="window-header" onmousedown="dragElement(this.parentElement)">
-Privacy Policy
-<div class="close-btn" onclick="closeWindow('privacyWindow')">X</div>
+<div class="window-header">Privacy Policy
+<span class="close-btn" onclick="closeWindow('privacyWindow')">X</span>
 </div>
 <div class="window-content">
-No personal data is collected on this site.
+No personal data is collected.
 </div>
 </div>
 
-<!-- COPYRIGHT -->
 <div class="window" id="copyrightWindow">
-<div class="window-header" onmousedown="dragElement(this.parentElement)">
-Copyright
-<div class="close-btn" onclick="closeWindow('copyrightWindow')">X</div>
+<div class="window-header">Copyright
+<span class="close-btn" onclick="closeWindow('copyrightWindow')">X</span>
 </div>
 <div class="window-content">
 © 2026 JamalsArchive. All Rights Reserved.
 </div>
 </div>
 
-<!-- MUSIC -->
 <div class="music-player">
 <audio id="bgMusic" loop autoplay>
-<source src="YOUR-MUSIC.mp3" type="audio/mpeg">
+<source src="have to..mp3" type="audio/mpeg">
 </audio>
 <input type="range" min="0" max="1" step="0.01" value="0.5"
-oninput="document.getElementById('bgMusic').volume=this.value">
+oninput="bgMusic.volume=this.value">
 </div>
 
 <script>
-function openWindow(id){
-let el=document.getElementById(id);
-el.style.display = (el.style.display==="block")?"none":"block";
+function toggleWindow(id){
+let w=document.getElementById(id);
+w.style.display=(w.style.display==="block")?"none":"block";
 }
 
 function closeWindow(id){
@@ -304,46 +314,40 @@ function openDiscord(){
 window.open("https://discord.gg/Dbac2yg7MQ","_blank");
 }
 
-function setTheme(bg,navColor){
+/* THEMES */
+function setLight(){
+document.body.className="light";
+}
+
+function setDark(){
+document.body.className="dark";
+}
+
+function setCustom(bg,nav){
+document.body.className="dark";
 document.body.style.background=bg;
 document.querySelector("nav").style.background=
-"linear-gradient(to right,"+bg+","+navColor+")";
+"linear-gradient(to right,"+bg+","+nav+")";
 }
 
-function whiteMode(){
-document.body.style.background="white";
-document.body.style.color="black";
-document.querySelector("nav").style.background="linear-gradient(to right,#fff,#ddd)";
+/* PERFECT DRAG */
+document.querySelectorAll(".window").forEach(win=>{
+let header=win.querySelector(".window-header");
+header.addEventListener("mousedown",function(e){
+let offsetX=e.clientX-win.offsetLeft;
+let offsetY=e.clientY-win.offsetTop;
+
+function move(e2){
+win.style.left=(e2.clientX-offsetX)+"px";
+win.style.top=(e2.clientY-offsetY)+"px";
 }
 
-/* DRAG FIXED */
-function dragElement(elmnt){
-let pos1=0,pos2=0,pos3=0,pos4=0;
-elmnt.onmousedown=dragMouseDown;
-
-function dragMouseDown(e){
-e.preventDefault();
-pos3=e.clientX;
-pos4=e.clientY;
-document.onmouseup=closeDrag;
-document.onmousemove=elementDrag;
-}
-
-function elementDrag(e){
-e.preventDefault();
-pos1=pos3-e.clientX;
-pos2=pos4-e.clientY;
-pos3=e.clientX;
-pos4=e.clientY;
-elmnt.style.top=(elmnt.offsetTop-pos2)+"px";
-elmnt.style.left=(elmnt.offsetLeft-pos1)+"px";
-}
-
-function closeDrag(){
-document.onmouseup=null;
-document.onmousemove=null;
-}
-}
+document.addEventListener("mousemove",move);
+document.addEventListener("mouseup",()=>{
+document.removeEventListener("mousemove",move);
+});
+});
+});
 </script>
 
 </body>
