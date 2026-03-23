@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>JamalsArchive</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -14,54 +14,38 @@ font-family:'Orbitron',sans-serif;
 }
 
 body{
+background:radial-gradient(circle at top,#0a0a0a,#000);
 color:white;
 overflow-x:hidden;
-background:linear-gradient(-45deg,#000,#111,#000,#111);
-background-size:400% 400%;
-animation:gradientBG 15s ease infinite;
-}
-
-/* Animated background */
-@keyframes gradientBG{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
 }
 
 /* NAV */
 nav{
 position:fixed;
+top:0;
 width:100%;
 padding:20px 40px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:rgba(0,0,0,0.7);
-backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,255,255,0.1);
 z-index:1000;
 }
 
-.brand{
-font-weight:800;
-font-size:22px;
-text-shadow:0 0 15px white;
-}
-
 nav ul{
-list-style:none;
 display:flex;
-gap:40px;
+gap:30px;
+list-style:none;
 }
 
 nav li{
 cursor:pointer;
-opacity:0.8;
+opacity:0.7;
 transition:0.3s;
 }
 
 nav li:hover{
 opacity:1;
-text-shadow:0 0 20px white,0 0 35px white;
 }
 
 /* HERO */
@@ -72,140 +56,84 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding-top:80px;
 }
 
 .presents{
-font-size:28px;
+font-size:18px;
 letter-spacing:4px;
-opacity:0;
-animation:fadeIn 1.5s forwards;
+opacity:0.6;
 }
 
 .title{
-font-size:120px;
-margin-top:10px;
-opacity:0;
-animation:fadeIn 2s forwards 0.5s;
-text-shadow:0 0 40px white,0 0 80px white,0 0 140px white;
-transition:0.3s;
+font-size:140px;
+font-weight:800;
+letter-spacing:6px;
 }
 
-.title:hover{
-text-shadow:0 0 90px white,0 0 180px white,0 0 260px white;
-transform:scale(1.03);
+.subtitle{
+margin-top:15px;
+opacity:0.7;
 }
 
-.rating{
-margin-top:25px;
-font-size:18px;
-opacity:0;
-animation:fadeIn 2s forwards 1s;
-}
-
-.download{
-margin-top:35px;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:25px;
-opacity:0;
-animation:fadeIn 2s forwards 1.5s;
-}
-
-.download-btn{
+/* BUTTON */
+.btn{
+margin-top:30px;
 padding:14px 45px;
-background:white;
-color:black;
-border-radius:12px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.2);
+border-radius:10px;
+backdrop-filter:blur(10px);
+color:white;
 text-decoration:none;
-font-weight:700;
-letter-spacing:1px;
 transition:0.3s;
 }
 
-.download-btn:hover{
-transform:scale(1.08);
-box-shadow:0 0 40px white;
+.btn:hover{
+background:rgba(255,255,255,0.15);
 }
 
-.download img{
-width:450px;
+/* SECTIONS */
+.section{
+padding:120px 20px;
+max-width:1100px;
+margin:auto;
+text-align:center;
+}
+
+.section h2{
+font-size:40px;
+margin-bottom:20px;
+}
+
+.section p{
+opacity:0.7;
+line-height:1.6;
+}
+
+/* IMAGE */
+.preview{
+margin-top:40px;
+width:100%;
+max-width:600px;
 border-radius:15px;
-box-shadow:0 0 40px rgba(0,0,0,0.6);
+opacity:0.9;
 transition:0.4s;
 }
 
-.download img:hover{
-transform:scale(1.03);
-box-shadow:0 0 70px white;
-}
-
-/* SETTINGS */
-.settings-btn{
-position:fixed;
-left:20px;
-top:50%;
-transform:translateY(-50%);
-background:#111;
-padding:15px;
-border-radius:12px;
-cursor:pointer;
-z-index:2000;
-}
-
-.window{
-position:fixed;
-top:150px;
-left:200px;
-width:450px;
-background:#111;
-border:1px solid #333;
-border-radius:12px;
-display:none;
-z-index:3000;
-}
-
-.window-header{
-padding:12px;
-background:#222;
-display:flex;
-justify-content:space-between;
-align-items:center;
-cursor:grab;
-}
-
-.close-btn{
-cursor:pointer;
-font-weight:bold;
-}
-
-.window-content{
-padding:20px;
-}
-
-.color-option{
-width:30px;
-height:30px;
-display:inline-block;
-margin:6px;
-cursor:pointer;
-border-radius:6px;
-border:1px solid #555;
+.preview:hover{
+opacity:1;
+transform:scale(1.02);
 }
 
 /* MUSIC */
-.music-player{
+.music{
 position:fixed;
 bottom:20px;
 right:20px;
-background:#111;
-padding:15px;
-border-radius:12px;
-}
-
-.music-player input{
-width:150px;
+background:rgba(255,255,255,0.05);
+padding:12px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.2);
 }
 
 /* PARTICLES */
@@ -213,13 +141,20 @@ canvas{
 position:fixed;
 top:0;
 left:0;
-pointer-events:none;
 z-index:-1;
+pointer-events:none;
 }
 
-/* FADE */
-@keyframes fadeIn{
-to{opacity:1;}
+/* SCROLL ANIMATION */
+.fade{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.fade.show{
+opacity:1;
+transform:translateY(0);
 }
 </style>
 </head>
@@ -229,162 +164,113 @@ to{opacity:1;}
 <canvas id="particles"></canvas>
 
 <nav>
-<div class="brand">JamalsArchive</div>
+<div>JamalsArchive</div>
 <ul>
-<li onclick="toggleWindow('aboutWindow')">TEAM</li>
-<li onclick="toggleWindow('comingWindow')">COMING GAMES</li>
-<li onclick="toggleWindow('privacyWindow')">PRIVACY</li>
-<li onclick="toggleWindow('copyrightWindow')">COPYRIGHT</li>
+<li onclick="scrollToSection('about')">TEAM</li>
+<li onclick="scrollToSection('games')">GAMES</li>
+<li onclick="scrollToSection('privacy')">PRIVACY</li>
 <li onclick="openDiscord()">DISCORD</li>
 </ul>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
 <div class="presents">JamalsArchive Presents</div>
-<h1 class="title">LETHAL APE</h1>
-<div class="rating">★★★★★ 4.8 – 200+ Reviews on Meta Quest</div>
+<div class="title">LETHAL APE</div>
+<div class="subtitle">★★★★★ 4.8 – 200+ Reviews on Meta Quest</div>
 
-<div class="download">
-<a href="https://www.meta.com/en-gb/experiences/lethal-ape/25282688598014625/?require_login=true" target="_blank" class="download-btn">
+<a href="https://www.meta.com/en-gb/experiences/lethal-ape/25282688598014625/" target="_blank" class="btn">
 Download
 </a>
-<img src="lethalape.jpg">
-</div>
 </section>
 
-<div class="settings-btn" onclick="toggleWindow('settingsWindow')">⚙</div>
+<!-- ABOUT -->
+<section class="section fade" id="about">
+<h2>TEAM</h2>
+<p>
+Jamal<br>
+Unity • Blender • C# • Design
+</p>
+</section>
 
-<div class="window" id="settingsWindow">
-<div class="window-header">
-Display Properties
-<span class="close-btn" onclick="closeWindow('settingsWindow')">X</span>
-</div>
-<div class="window-content">
-<p>Background Themes</p>
-<div class="color-option" style="background:#000" onclick="setTheme('#000','#111')"></div>
-<div class="color-option" style="background:#001f3f" onclick="setTheme('#001f3f','#002b5c')"></div>
-<div class="color-option" style="background:#300000" onclick="setTheme('#300000','#4d0000')"></div>
-<div class="color-option" style="background:#1b0033" onclick="setTheme('#1b0033','#330066')"></div>
-<div class="color-option" style="background:#002b00" onclick="setTheme('#002b00','#004d00')"></div>
-</div>
-</div>
+<!-- GAME -->
+<section class="section fade" id="games">
+<h2>LETHAL APE</h2>
+<p>
+A horror experience built for VR. Clean movement, no gimmicks — just raw atmosphere.
+</p>
 
-<div class="window" id="aboutWindow">
-<div class="window-header">
-About The Owner
-<span class="close-btn" onclick="closeWindow('aboutWindow')">X</span>
-</div>
-<div class="window-content">
-<h2>Jamal</h2><br>
-Unity<br>
-Blender<br>
-Python & C#<br>
-Website Design
-</div>
-</div>
+<img src="lethalape.jpg" class="preview">
+</section>
 
-<div class="window" id="comingWindow">
-<div class="window-header">
-Coming Games
-<span class="close-btn" onclick="closeWindow('comingWindow')">X</span>
-</div>
-<div class="window-content">
-Lethal Ape Redux OG<br>
-More Coming Soon...
-</div>
-</div>
+<!-- PRIVACY -->
+<section class="section fade" id="privacy">
+<h2>PRIVACY</h2>
+<p>No personal data is collected.</p>
+</section>
 
-<div class="window" id="privacyWindow">
-<div class="window-header">
-Privacy Policy
-<span class="close-btn" onclick="closeWindow('privacyWindow')">X</span>
-</div>
-<div class="window-content">
-No personal data is collected.
-</div>
-</div>
+<!-- FOOTER -->
+<section class="section fade">
+<p>© 2026 JamalsArchive</p>
+</section>
 
-<div class="window" id="copyrightWindow">
-<div class="window-header">
-Copyright
-<span class="close-btn" onclick="closeWindow('copyrightWindow')">X</span>
-</div>
-<div class="window-content">
-© 2026 JamalsArchive. All Rights Reserved.
-</div>
-</div>
-
-<div class="music-player">
-<audio id="bgMusic" loop autoplay muted>
+<!-- MUSIC -->
+<div class="music">
+<audio id="music" loop autoplay muted>
 <source src="have to..mp3" type="audio/mpeg">
 </audio>
 <input type="range" min="0" max="1" step="0.01" value="0.5"
-oninput="document.getElementById('bgMusic').volume=this.value">
+oninput="music.volume=this.value">
 </div>
 
 <script>
-function toggleWindow(id){
-let w=document.getElementById(id);
-w.style.display=(w.style.display==="block")?"none":"block";
-}
-
-function closeWindow(id){
-document.getElementById(id).style.display="none";
-}
-
 function openDiscord(){
 window.open("https://discord.gg/Dbac2yg7MQ","_blank");
 }
 
-function setTheme(bg,navColor){
-document.body.style.background=bg;
+function scrollToSection(id){
+document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-/* Autoplay Fix */
-window.addEventListener("load",function(){
-const music=document.getElementById("bgMusic");
-music.volume=0.5;
+/* MUSIC AUTOPLAY FIX */
+window.onload=()=>{
 music.muted=false;
 music.play().catch(()=>{
 document.addEventListener("click",()=>music.play(),{once:true});
 });
+};
+
+/* SCROLL FADE */
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.classList.add("show");
+}
+});
 });
 
-/* Drag Fix */
-document.querySelectorAll(".window").forEach(win=>{
-let header=win.querySelector(".window-header");
-header.onmousedown=function(e){
-let shiftX=e.clientX-win.getBoundingClientRect().left;
-let shiftY=e.clientY-win.getBoundingClientRect().top;
-function move(e){
-win.style.left=e.pageX-shiftX+'px';
-win.style.top=e.pageY-shiftY+'px';
-}
-document.addEventListener('mousemove',move);
-document.onmouseup=function(){
-document.removeEventListener('mousemove',move);
-document.onmouseup=null;
-};
-};
-});
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
 
 /* PARTICLES */
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
+
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 let particles=[];
-for(let i=0;i<50;i++){
-particles.push({x:Math.random()*canvas.width,
+for(let i=0;i<40;i++){
+particles.push({
+x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
 r:Math.random()*2+1,
-d:Math.random()*0.5});
+d:Math.random()*0.3
+});
 }
 
 function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle="white";
+ctx.fillStyle="rgba(255,255,255,0.2)";
 particles.forEach(p=>{
 ctx.beginPath();
 ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
