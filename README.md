@@ -1,61 +1,49 @@
-# JamalsArchive 🌌
+**JamalsArchive 🌌**
+This is the official site for JamalsArchive — just a small indie studio making games, mostly multiplayer and horror stuff.
 
-Official website for **JamalsArchive**, an independent game development studio focused on immersive multiplayer and horror experiences.
-
-🔗 Live Website: https://jamalsarchive.github.io/
-
----
-
-## 🎮 About JamalsArchive
-
-JamalsArchive is a game development brand creating unique and atmospheric experiences, including:
-
-- Multiplayer projects
-- Horror-based games
-- Experimental VR concepts
-- Community-driven releases
+🔗 [https://jamalsarchive.github.io/](https://jamalsarchive.github.io/)
 
 ---
 
-## 🌐 Website Features
+### 🎮 About
 
-The website includes:
-
-- 🏠 Home Section
-- 🎮 Games Showcase
-- 💬 Discord Community Link
-- 🏆 Credits Section
-- © Copyright Information
-
-Built using:
-- HTML5
-- CSS3
-- GitHub Pages
+JamalsArchive is basically where I drop projects I’ve been working on.
+Most of them are horror, multiplayer, or just random experimental ideas I thought were cool.
 
 ---
 
-## 🎯 Current Projects
+### 🌐 What’s on the site
 
-### Lethal Ape
+* Home page
+* Games section
+* Discord link
+* Credits
+* Basic copyright stuff
 
-### (soon) Lethal Ape Redux OG
-
-(More projects coming soon.)
-
----
-
-## 💬 Community
-
-Join our Discord to stay updated on new releases and announcements.
+Built with HTML/CSS and hosted on GitHub Pages, nothing crazy.
 
 ---
 
-## © Copyright
+### 🎯 Projects
 
-© 2026 JamalsArchive. All rights reserved.
-
-Unauthorized copying, redistribution, or modification of content is prohibited without permission.
+* Lethal Ape
+* Lethal Ape Redux OG (soon)
+* more coming when they’re ready
 
 ---
 
-### Created and Maintained by King Jamal 👑
+### 💬 Community
+
+There’s a Discord if you wanna keep up with updates or just see what’s going on.
+
+---
+
+### © Copyright
+
+© 2026 JamalsArchive
+
+don’t repost or mess with the content without permission.
+
+---
+
+mantained by Jamal
