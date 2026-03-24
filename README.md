@@ -1,7 +1,7 @@
 **JamalsArchive 🌌**
 This is the official site for JamalsArchive — just a small indie studio making games, mostly multiplayer and horror stuff.
 
-🔗 [https://jamalsarchive.github.io/](https://jamalsarchive.github.io/)
+🔗 [https://jamalsarchive.github.io/](https://jamalsarchive.github.io/ )
 
 ---
 
