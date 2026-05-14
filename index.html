@@ -42,22 +42,41 @@ font-weight:800;
 letter-spacing:2px;
 }
 
+/* FIXED TABS */
 .tabs{
 display:flex;
-gap:15px;
-flex-wrap:wrap;
+gap:14px;
+align-items:center;
 justify-content:center;
 }
 
 .tabs div{
 cursor:pointer;
-opacity:0.6;
-transition:0.3s;
-font-size:14px;
+width:44px;
+height:44px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:12px;
+transition:0.2s;
+opacity:0.7;
+}
+
+.tabs div img{
+width:22px;
+height:22px;
+object-fit:contain;
+pointer-events:none;
 }
 
 .tabs div:hover{
 opacity:1;
+background:rgba(255,255,255,0.08);
+transform:translateY(-2px);
+}
+
+.tabs div:active{
+transform:scale(0.95);
 }
 
 /* PAGES */
@@ -85,7 +104,7 @@ font-size:clamp(40px, 10vw, 120px);
 font-weight:800;
 }
 
-/* TEAM GRID */
+/* TEAM */
 .team-container{
 display:grid;
 grid-template-columns: repeat(3, 1fr);
@@ -96,7 +115,6 @@ max-width:1000px;
 }
 
 .card{
-height:100%;
 padding:20px;
 background:#0a0a0a;
 border:1px solid rgba(255,255,255,0.08);
@@ -115,10 +133,6 @@ width:80px;
 height:80px;
 border-radius:50%;
 margin-bottom:15px;
-}
-
-.card h3{
-margin-bottom:8px;
 }
 
 .card p{
@@ -144,15 +158,12 @@ grid-template-columns: repeat(2, 1fr);
 }
 
 @media (max-width: 600px){
-
 .title{
 font-size:50px;
 }
-
 .team-container{
 grid-template-columns: 1fr;
 }
-
 }
 </style>
 </head>
@@ -166,26 +177,14 @@ grid-template-columns: 1fr;
 <div class="logo">JAMALSARCHIVE</div>
 
 <div class="tabs">
-  <div class="tab" onclick="showPage('home')">
-    <img src="HomeIcon.png" alt="Home">
-  </div>
-
-  <div class="tab" onclick="showPage('team')">
-    <img src="TeamIcon.png" alt="Team">
-  </div>
-
-  <div class="tab" onclick="showPage('games')">
-    <img src="GamesIcon.png" alt="Games">
-  </div>
-
-  <div class="tab" onclick="showPage('privacy')">
-    <img src="CopyrightIcon.png" alt="Privacy">
-  </div>
-
-  <div class="tab" onclick="openDiscord()">
-    <img src="DiscordIcon.png" alt="Discord">
-  </div>
+  <div onclick="showPage('home')"><img src="HomeIcon.png"></div>
+  <div onclick="showPage('team')"><img src="TeamIcon.png"></div>
+  <div onclick="showPage('games')"><img src="GamesIcon.png"></div>
+  <div onclick="showPage('privacy')"><img src="CopyrightIcon.png"></div>
+  <div onclick="openDiscord()"><img src="DiscordIcon.png"></div>
 </div>
+
+</nav>
 
 <!-- HOME -->
 <div class="page active" id="home">
